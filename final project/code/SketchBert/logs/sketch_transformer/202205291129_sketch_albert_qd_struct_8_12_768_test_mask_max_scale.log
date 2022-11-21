@@ -1,0 +1,351 @@
+2022-05-29 11:29:48,707 - main.py[line:53] - INFO: {trainer: sketch_transformer, batch_size: 10, num_iterations: 2000000, num_epoch: 20, learning_rate: 0.0001, gpu_ids: [0], task_types: ['sketchclsinput'], get_type: single, mask_task_type: task, load_pretrained: pretrained, which_pretrained: ['enc_net'], restore_checkpoint_path: latest_ckpt.pth, dataset: quickdraw_memmap, num_train_samples: 20000000, num_val_samples: 10, num_display_samples: 10, shuffle_val: False, loader_num_workers: 4, sum_path: quickdraw/memmap_sum.txt, offset_path: quickdraw/offsets.npz, cls_limit_path: , mode: train, max_length: 250, max_size: [128, 128], image_size: 224, type_size: 3, mask_prob: 0.85, limit: 1000, stroke_type: stroke-5, input_is_complete: False, max_cls_cache: 345, normalization_type: max_scale, max_scale_factor: 10, each_max_samples: 5000, each_image_max_samples: 100, each_val_samples: 1000, print_every: 100, log_dir: sketch_albert_qd_struct_8_12_768_test_mask_max_scale, checkpoint_every: 2000, save_model_every: 20000, encoder_type: Ori, layers_setting: [[12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072]], output_attentions: False, output_all_states: False, keep_multihead_output: False, input_dim: 5, cls_dim: 345, latent_dim: 128, rel_feat_dim: 128, M: 16, embed_layers_setting: [128, 256, 512], rel_layers_setting: [], cls_layers_setting: [], rec_layers_setting: [512, 256, 128], sketch_embed_type: linear, embed_pool_type: sum, model_type: albert, position_type: learn, segment_type: none, atten_type: single, attention_norm_type: LN, inter_activation: gelu, attention_dropout_prob: 0.5, hidden_dropout_prob: 0.5, output_dropout_prob: 0.5, triplet_margin: 2.0, gamma: 0.1, mask_gmm_weight: 1, rec_gmm_weight: 0, mask_axis_weight: 1, rec_axis_weight: 0, mask_type_weight: 1, rec_type_weight: 0, prediction_weight: 1, triplet_weight: 1, }
+2022-05-29 11:29:48,708 - main.py[line:56] - INFO: Initialize the dataset...
+2022-05-29 11:29:54,143 - __init__.py[line:257] - INFO: There are 44500 iterations per epoch
+2022-05-29 11:29:54,144 - __init__.py[line:258] - INFO: Training dataset has 445000 images.
+2022-05-29 11:29:59,056 - __init__.py[line:265] - INFO: Val dataset has 89000 images.
+2022-05-29 11:30:00,357 - main.py[line:66] - INFO: Finish the dataset initialization.
+2022-05-29 11:30:00,373 - trainer.py[line:56] - INFO: Defining Network Structure...
+2022-05-29 11:30:00,450 - trainer.py[line:69] - INFO: Sketch Transformer Sturture:
+SketchTransformerModel(
+  (embedding): SketchEmbedding(
+    (embedding): Linear(in_features=5, out_features=128, bias=True)
+  )
+  (pos_embedding): SketchLearnPositionEmbedding(
+    (pos_embedding): Embedding(251, 128)
+  )
+  (embed_refine_net): SketchEmbeddingRefineNetwork(
+    (layers): ModuleList(
+      (0): Linear(in_features=128, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=512, bias=True)
+      (2): Linear(in_features=512, out_features=768, bias=True)
+    )
+  )
+  (encoder): SketchALEncoder(
+    (sketch_layer): SketchLayer(
+      (attention): SketchMultiHeadAttention(
+        (attention): SketchSelfAttention(
+          (query): Linear(in_features=768, out_features=768, bias=True)
+          (key): Linear(in_features=768, out_features=768, bias=True)
+          (value): Linear(in_features=768, out_features=768, bias=True)
+          (dropout): Dropout(p=0.5, inplace=False)
+        )
+        (output): SketchOutput(
+          (fc): Linear(in_features=768, out_features=768, bias=True)
+          (norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.5, inplace=False)
+        )
+      )
+      (inter_layer): SketchIntermediate(
+        (fc): Linear(in_features=768, out_features=3072, bias=True)
+      )
+      (output): SketchOutput(
+        (fc): Linear(in_features=3072, out_features=768, bias=True)
+        (norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+)
+2022-05-29 11:30:05,560 - trainer.py[line:88] - INFO: Finish Construction of Networks.
+2022-05-29 11:30:05,561 - trainer.py[line:100] - INFO: Finish Construction of Optimizers.
+2022-05-29 11:30:05,561 - trainer.py[line:103] - INFO: Defining Losses...
+2022-05-29 11:30:05,561 - trainer.py[line:108] - INFO: Finish Losses.
+2022-05-29 11:30:05,562 - trainer.py[line:133] - INFO: Restoring from checkpoint:latest_ckpt.pth
+2022-05-29 11:30:05,624 - trainer.py[line:137] - INFO: Restoring netE
+2022-05-29 11:30:17,844 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [100/2000000], [100/44500]:Losses:[train_prediction]:4.7163
+2022-05-29 11:30:28,041 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [200/2000000], [200/44500]:Losses:[train_prediction]:4.7511
+2022-05-29 11:30:38,257 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [300/2000000], [300/44500]:Losses:[train_prediction]:3.9712
+2022-05-29 11:30:48,623 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [400/2000000], [400/44500]:Losses:[train_prediction]:4.4827
+2022-05-29 11:30:59,014 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [500/2000000], [500/44500]:Losses:[train_prediction]:4.1691
+2022-05-29 11:31:09,166 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [600/2000000], [600/44500]:Losses:[train_prediction]:3.7875
+2022-05-29 11:31:19,378 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.101/D:0.003], Total Iter [700/2000000], [700/44500]:Losses:[train_prediction]:4.2611
+2022-05-29 11:31:29,725 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [800/2000000], [800/44500]:Losses:[train_prediction]:4.3693
+2022-05-29 11:31:39,873 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.100[T:0.098/D:0.003], Total Iter [900/2000000], [900/44500]:Losses:[train_prediction]:3.6617
+2022-05-29 11:31:50,040 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [1000/2000000], [1000/44500]:Losses:[train_prediction]:3.6987
+2022-05-29 11:32:00,374 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [1100/2000000], [1100/44500]:Losses:[train_prediction]:3.7077
+2022-05-29 11:32:10,585 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.101/D:0.003], Total Iter [1200/2000000], [1200/44500]:Losses:[train_prediction]:4.2789
+2022-05-29 11:32:20,731 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [1300/2000000], [1300/44500]:Losses:[train_prediction]:3.6475
+2022-05-29 11:32:30,896 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [1400/2000000], [1400/44500]:Losses:[train_prediction]:3.8134
+2022-05-29 11:32:41,047 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [1500/2000000], [1500/44500]:Losses:[train_prediction]:4.0672
+2022-05-29 11:32:51,454 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [1600/2000000], [1600/44500]:Losses:[train_prediction]:3.3995
+2022-05-29 11:33:01,718 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [1700/2000000], [1700/44500]:Losses:[train_prediction]:4.0545
+2022-05-29 11:33:11,983 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [1800/2000000], [1800/44500]:Losses:[train_prediction]:3.8810
+2022-05-29 11:33:22,202 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [1900/2000000], [1900/44500]:Losses:[train_prediction]:3.6515
+2022-05-29 11:33:32,479 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [2000/2000000], [2000/44500]:Losses:[train_prediction]:2.9013
+2022-05-29 11:38:55,038 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:322.351[T:0.033/D:322.319], Total Iter [2000/2000000], [2000/44500]:Losses:[val_prediction]:3.7147; Evaluations:[val_accuracy_1]:0.0986, [val_accuracy_5]:0.3371
+2022-05-29 11:38:55,082 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 11:38:56,070 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 11:39:07,289 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [2100/2000000], [2100/44500]:Losses:[train_prediction]:3.6319
+2022-05-29 11:39:17,497 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [2200/2000000], [2200/44500]:Losses:[train_prediction]:3.6043
+2022-05-29 11:39:27,658 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [2300/2000000], [2300/44500]:Losses:[train_prediction]:4.0784
+2022-05-29 11:39:37,869 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [2400/2000000], [2400/44500]:Losses:[train_prediction]:3.8262
+2022-05-29 11:39:48,074 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.100/D:0.003], Total Iter [2500/2000000], [2500/44500]:Losses:[train_prediction]:3.2382
+2022-05-29 11:39:58,292 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [2600/2000000], [2600/44500]:Losses:[train_prediction]:3.7188
+2022-05-29 11:40:08,502 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [2700/2000000], [2700/44500]:Losses:[train_prediction]:3.5889
+2022-05-29 11:40:18,735 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.101/D:0.003], Total Iter [2800/2000000], [2800/44500]:Losses:[train_prediction]:3.6690
+2022-05-29 11:40:28,957 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.101/D:0.003], Total Iter [2900/2000000], [2900/44500]:Losses:[train_prediction]:3.9537
+2022-05-29 11:40:39,180 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [3000/2000000], [3000/44500]:Losses:[train_prediction]:3.4147
+2022-05-29 11:40:49,504 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [3100/2000000], [3100/44500]:Losses:[train_prediction]:3.1870
+2022-05-29 11:40:59,825 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.101/D:0.003], Total Iter [3200/2000000], [3200/44500]:Losses:[train_prediction]:3.4148
+2022-05-29 11:41:10,131 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [3300/2000000], [3300/44500]:Losses:[train_prediction]:3.6800
+2022-05-29 11:41:20,416 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [3400/2000000], [3400/44500]:Losses:[train_prediction]:3.8888
+2022-05-29 11:41:30,580 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [3500/2000000], [3500/44500]:Losses:[train_prediction]:3.4870
+2022-05-29 11:41:40,793 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [3600/2000000], [3600/44500]:Losses:[train_prediction]:2.9337
+2022-05-29 11:41:51,061 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [3700/2000000], [3700/44500]:Losses:[train_prediction]:3.0259
+2022-05-29 11:42:01,243 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [3800/2000000], [3800/44500]:Losses:[train_prediction]:3.3588
+2022-05-29 11:42:11,435 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [3900/2000000], [3900/44500]:Losses:[train_prediction]:3.4504
+2022-05-29 11:42:21,644 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [4000/2000000], [4000/44500]:Losses:[train_prediction]:4.0857
+2022-05-29 11:47:44,335 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:322.456[T:0.033/D:322.423], Total Iter [4000/2000000], [4000/44500]:Losses:[val_prediction]:3.2457; Evaluations:[val_accuracy_1]:0.1779, [val_accuracy_5]:0.4778
+2022-05-29 11:47:44,380 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 11:47:45,405 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 11:47:56,619 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [4100/2000000], [4100/44500]:Losses:[train_prediction]:2.8909
+2022-05-29 11:48:06,790 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.101/D:0.003], Total Iter [4200/2000000], [4200/44500]:Losses:[train_prediction]:3.0070
+2022-05-29 11:48:16,971 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [4300/2000000], [4300/44500]:Losses:[train_prediction]:2.9346
+2022-05-29 11:48:27,163 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [4400/2000000], [4400/44500]:Losses:[train_prediction]:3.0335
+2022-05-29 11:48:37,329 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [4500/2000000], [4500/44500]:Losses:[train_prediction]:3.2420
+2022-05-29 11:48:47,600 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [4600/2000000], [4600/44500]:Losses:[train_prediction]:3.1317
+2022-05-29 11:48:57,925 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [4700/2000000], [4700/44500]:Losses:[train_prediction]:3.2420
+2022-05-29 11:49:08,169 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [4800/2000000], [4800/44500]:Losses:[train_prediction]:3.0224
+2022-05-29 11:49:18,340 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [4900/2000000], [4900/44500]:Losses:[train_prediction]:2.8150
+2022-05-29 11:49:28,506 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [5000/2000000], [5000/44500]:Losses:[train_prediction]:3.4486
+2022-05-29 11:49:38,699 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [5100/2000000], [5100/44500]:Losses:[train_prediction]:3.0814
+2022-05-29 11:49:48,862 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [5200/2000000], [5200/44500]:Losses:[train_prediction]:3.1250
+2022-05-29 11:49:59,251 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [5300/2000000], [5300/44500]:Losses:[train_prediction]:2.5181
+2022-05-29 11:50:09,383 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [5400/2000000], [5400/44500]:Losses:[train_prediction]:3.1924
+2022-05-29 11:50:19,580 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [5500/2000000], [5500/44500]:Losses:[train_prediction]:2.6937
+2022-05-29 11:50:29,737 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [5600/2000000], [5600/44500]:Losses:[train_prediction]:2.8647
+2022-05-29 11:50:39,888 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [5700/2000000], [5700/44500]:Losses:[train_prediction]:2.7159
+2022-05-29 11:50:50,056 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [5800/2000000], [5800/44500]:Losses:[train_prediction]:2.0807
+2022-05-29 11:51:00,345 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [5900/2000000], [5900/44500]:Losses:[train_prediction]:2.7793
+2022-05-29 11:51:10,658 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [6000/2000000], [6000/44500]:Losses:[train_prediction]:2.1627
+2022-05-29 11:56:32,512 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:321.598[T:0.033/D:321.565], Total Iter [6000/2000000], [6000/44500]:Losses:[val_prediction]:2.9829; Evaluations:[val_accuracy_1]:0.2298, [val_accuracy_5]:0.5612
+2022-05-29 11:56:32,555 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 11:56:33,578 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 11:56:44,740 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [6100/2000000], [6100/44500]:Losses:[train_prediction]:2.4415
+2022-05-29 11:56:54,953 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [6200/2000000], [6200/44500]:Losses:[train_prediction]:2.4388
+2022-05-29 11:57:05,245 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [6300/2000000], [6300/44500]:Losses:[train_prediction]:3.4599
+2022-05-29 11:57:15,449 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [6400/2000000], [6400/44500]:Losses:[train_prediction]:3.0974
+2022-05-29 11:57:25,640 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [6500/2000000], [6500/44500]:Losses:[train_prediction]:2.8478
+2022-05-29 11:57:35,819 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [6600/2000000], [6600/44500]:Losses:[train_prediction]:2.8231
+2022-05-29 11:57:45,959 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [6700/2000000], [6700/44500]:Losses:[train_prediction]:2.4446
+2022-05-29 11:57:56,329 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [6800/2000000], [6800/44500]:Losses:[train_prediction]:3.3119
+2022-05-29 11:58:06,512 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [6900/2000000], [6900/44500]:Losses:[train_prediction]:2.8343
+2022-05-29 11:58:16,692 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [7000/2000000], [7000/44500]:Losses:[train_prediction]:3.4510
+2022-05-29 11:58:26,850 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [7100/2000000], [7100/44500]:Losses:[train_prediction]:2.7927
+2022-05-29 11:58:37,016 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [7200/2000000], [7200/44500]:Losses:[train_prediction]:3.7978
+2022-05-29 11:58:47,252 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [7300/2000000], [7300/44500]:Losses:[train_prediction]:3.7816
+2022-05-29 11:58:57,494 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [7400/2000000], [7400/44500]:Losses:[train_prediction]:2.0936
+2022-05-29 11:59:07,786 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [7500/2000000], [7500/44500]:Losses:[train_prediction]:2.5746
+2022-05-29 11:59:17,979 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [7600/2000000], [7600/44500]:Losses:[train_prediction]:2.4032
+2022-05-29 11:59:28,137 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [7700/2000000], [7700/44500]:Losses:[train_prediction]:2.4841
+2022-05-29 11:59:38,353 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.106[T:0.103/D:0.004], Total Iter [7800/2000000], [7800/44500]:Losses:[train_prediction]:2.4314
+2022-05-29 11:59:48,604 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.111[T:0.107/D:0.004], Total Iter [7900/2000000], [7900/44500]:Losses:[train_prediction]:2.4588
+2022-05-29 11:59:59,083 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [8000/2000000], [8000/44500]:Losses:[train_prediction]:3.0417
+2022-05-29 12:05:24,364 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:324.996[T:0.033/D:324.963], Total Iter [8000/2000000], [8000/44500]:Losses:[val_prediction]:2.8059; Evaluations:[val_accuracy_1]:0.2607, [val_accuracy_5]:0.6025
+2022-05-29 12:05:24,409 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 12:05:25,412 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 12:05:45,811 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.107[T:0.104/D:0.003], Total Iter [8100/2000000], [8100/44500]:Losses:[train_prediction]:2.5361
+2022-05-29 12:05:56,156 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [8200/2000000], [8200/44500]:Losses:[train_prediction]:2.5679
+2022-05-29 12:06:06,603 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.106[T:0.103/D:0.003], Total Iter [8300/2000000], [8300/44500]:Losses:[train_prediction]:2.8651
+2022-05-29 12:06:16,853 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [8400/2000000], [8400/44500]:Losses:[train_prediction]:3.1048
+2022-05-29 12:06:27,039 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [8500/2000000], [8500/44500]:Losses:[train_prediction]:3.2198
+2022-05-29 12:06:37,308 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [8600/2000000], [8600/44500]:Losses:[train_prediction]:3.2282
+2022-05-29 12:06:47,630 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [8700/2000000], [8700/44500]:Losses:[train_prediction]:2.7480
+2022-05-29 12:06:57,994 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [8800/2000000], [8800/44500]:Losses:[train_prediction]:2.5358
+2022-05-29 12:07:08,209 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [8900/2000000], [8900/44500]:Losses:[train_prediction]:1.7236
+2022-05-29 12:07:18,425 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [9000/2000000], [9000/44500]:Losses:[train_prediction]:3.1335
+2022-05-29 12:07:28,582 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [9100/2000000], [9100/44500]:Losses:[train_prediction]:2.2956
+2022-05-29 12:07:38,777 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [9200/2000000], [9200/44500]:Losses:[train_prediction]:2.6111
+2022-05-29 12:07:48,989 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [9300/2000000], [9300/44500]:Losses:[train_prediction]:3.9375
+2022-05-29 12:07:59,290 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [9400/2000000], [9400/44500]:Losses:[train_prediction]:2.9810
+2022-05-29 12:08:09,553 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.108[T:0.105/D:0.003], Total Iter [9500/2000000], [9500/44500]:Losses:[train_prediction]:2.9231
+2022-05-29 12:08:19,784 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [9600/2000000], [9600/44500]:Losses:[train_prediction]:3.6890
+2022-05-29 12:08:29,977 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [9700/2000000], [9700/44500]:Losses:[train_prediction]:2.5578
+2022-05-29 12:08:40,139 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [9800/2000000], [9800/44500]:Losses:[train_prediction]:2.7035
+2022-05-29 12:08:50,406 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [9900/2000000], [9900/44500]:Losses:[train_prediction]:3.2000
+2022-05-29 12:09:00,621 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [10000/2000000], [10000/44500]:Losses:[train_prediction]:2.6564
+2022-05-29 12:14:24,908 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:324.024[T:0.033/D:323.991], Total Iter [10000/2000000], [10000/44500]:Losses:[val_prediction]:2.7236; Evaluations:[val_accuracy_1]:0.2838, [val_accuracy_5]:0.6253
+2022-05-29 12:14:24,955 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 12:14:25,979 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 12:14:37,232 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [10100/2000000], [10100/44500]:Losses:[train_prediction]:3.3210
+2022-05-29 12:14:47,409 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [10200/2000000], [10200/44500]:Losses:[train_prediction]:2.6795
+2022-05-29 12:14:57,653 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [10300/2000000], [10300/44500]:Losses:[train_prediction]:2.1470
+2022-05-29 12:15:07,879 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.106[T:0.103/D:0.003], Total Iter [10400/2000000], [10400/44500]:Losses:[train_prediction]:2.5200
+2022-05-29 12:15:18,202 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.106[T:0.103/D:0.003], Total Iter [10500/2000000], [10500/44500]:Losses:[train_prediction]:1.8978
+2022-05-29 12:15:28,383 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [10600/2000000], [10600/44500]:Losses:[train_prediction]:3.3077
+2022-05-29 12:15:38,505 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [10700/2000000], [10700/44500]:Losses:[train_prediction]:2.9683
+2022-05-29 12:15:48,666 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.108[T:0.105/D:0.003], Total Iter [10800/2000000], [10800/44500]:Losses:[train_prediction]:2.2760
+2022-05-29 12:15:59,264 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.100/D:0.003], Total Iter [10900/2000000], [10900/44500]:Losses:[train_prediction]:2.0837
+2022-05-29 12:16:09,469 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.101/D:0.003], Total Iter [11000/2000000], [11000/44500]:Losses:[train_prediction]:2.2874
+2022-05-29 12:16:19,735 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [11100/2000000], [11100/44500]:Losses:[train_prediction]:2.4911
+2022-05-29 12:16:30,017 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [11200/2000000], [11200/44500]:Losses:[train_prediction]:1.3314
+2022-05-29 12:16:40,335 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [11300/2000000], [11300/44500]:Losses:[train_prediction]:2.8406
+2022-05-29 12:16:50,538 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [11400/2000000], [11400/44500]:Losses:[train_prediction]:2.7570
+2022-05-29 12:17:00,826 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [11500/2000000], [11500/44500]:Losses:[train_prediction]:2.1056
+2022-05-29 12:17:11,120 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.106[T:0.103/D:0.003], Total Iter [11600/2000000], [11600/44500]:Losses:[train_prediction]:2.8138
+2022-05-29 12:17:21,373 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [11700/2000000], [11700/44500]:Losses:[train_prediction]:2.7278
+2022-05-29 12:17:31,572 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [11800/2000000], [11800/44500]:Losses:[train_prediction]:2.6686
+2022-05-29 12:17:41,745 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [11900/2000000], [11900/44500]:Losses:[train_prediction]:2.6780
+2022-05-29 12:17:52,068 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [12000/2000000], [12000/44500]:Losses:[train_prediction]:2.6256
+2022-05-29 12:23:14,484 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:322.149[T:0.033/D:322.116], Total Iter [12000/2000000], [12000/44500]:Losses:[val_prediction]:2.4795; Evaluations:[val_accuracy_1]:0.3367, [val_accuracy_5]:0.6867
+2022-05-29 12:23:14,528 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 12:23:15,546 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 12:23:26,743 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [12100/2000000], [12100/44500]:Losses:[train_prediction]:2.2739
+2022-05-29 12:23:37,009 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [12200/2000000], [12200/44500]:Losses:[train_prediction]:2.7071
+2022-05-29 12:23:47,185 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [12300/2000000], [12300/44500]:Losses:[train_prediction]:2.0280
+2022-05-29 12:23:57,545 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.102/D:0.003], Total Iter [12400/2000000], [12400/44500]:Losses:[train_prediction]:2.8620
+2022-05-29 12:24:07,789 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [12500/2000000], [12500/44500]:Losses:[train_prediction]:2.4935
+2022-05-29 12:24:18,059 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [12600/2000000], [12600/44500]:Losses:[train_prediction]:1.7702
+2022-05-29 12:24:28,301 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [12700/2000000], [12700/44500]:Losses:[train_prediction]:3.2335
+2022-05-29 12:24:38,545 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.113[T:0.110/D:0.003], Total Iter [12800/2000000], [12800/44500]:Losses:[train_prediction]:3.7870
+2022-05-29 12:24:48,814 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [12900/2000000], [12900/44500]:Losses:[train_prediction]:1.7239
+2022-05-29 12:24:59,161 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [13000/2000000], [13000/44500]:Losses:[train_prediction]:2.5691
+2022-05-29 12:25:09,366 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [13100/2000000], [13100/44500]:Losses:[train_prediction]:2.5754
+2022-05-29 12:25:19,614 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [13200/2000000], [13200/44500]:Losses:[train_prediction]:1.9719
+2022-05-29 12:25:29,777 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [13300/2000000], [13300/44500]:Losses:[train_prediction]:3.0921
+2022-05-29 12:25:39,978 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [13400/2000000], [13400/44500]:Losses:[train_prediction]:1.9090
+2022-05-29 12:25:50,184 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [13500/2000000], [13500/44500]:Losses:[train_prediction]:2.1973
+2022-05-29 12:26:00,439 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [13600/2000000], [13600/44500]:Losses:[train_prediction]:2.2696
+2022-05-29 12:26:10,617 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [13700/2000000], [13700/44500]:Losses:[train_prediction]:2.1566
+2022-05-29 12:26:20,870 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.106[T:0.103/D:0.003], Total Iter [13800/2000000], [13800/44500]:Losses:[train_prediction]:1.7705
+2022-05-29 12:26:31,114 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.106[T:0.103/D:0.003], Total Iter [13900/2000000], [13900/44500]:Losses:[train_prediction]:2.7667
+2022-05-29 12:26:41,315 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [14000/2000000], [14000/44500]:Losses:[train_prediction]:2.2230
+2022-05-29 12:32:04,429 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:322.821[T:0.033/D:322.788], Total Iter [14000/2000000], [14000/44500]:Losses:[val_prediction]:2.3795; Evaluations:[val_accuracy_1]:0.3616, [val_accuracy_5]:0.7101
+2022-05-29 12:32:04,473 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 12:32:05,489 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 12:32:16,690 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [14100/2000000], [14100/44500]:Losses:[train_prediction]:1.6940
+2022-05-29 12:32:26,899 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [14200/2000000], [14200/44500]:Losses:[train_prediction]:2.3319
+2022-05-29 12:32:37,068 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [14300/2000000], [14300/44500]:Losses:[train_prediction]:1.7752
+2022-05-29 12:32:47,265 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.106[T:0.103/D:0.003], Total Iter [14400/2000000], [14400/44500]:Losses:[train_prediction]:2.4174
+2022-05-29 12:32:57,589 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [14500/2000000], [14500/44500]:Losses:[train_prediction]:2.3719
+2022-05-29 12:33:07,724 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.100[T:0.098/D:0.003], Total Iter [14600/2000000], [14600/44500]:Losses:[train_prediction]:1.9744
+2022-05-29 12:33:17,836 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [14700/2000000], [14700/44500]:Losses:[train_prediction]:2.1829
+2022-05-29 12:33:27,988 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [14800/2000000], [14800/44500]:Losses:[train_prediction]:3.0006
+2022-05-29 12:33:38,133 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [14900/2000000], [14900/44500]:Losses:[train_prediction]:2.7156
+2022-05-29 12:33:48,338 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [15000/2000000], [15000/44500]:Losses:[train_prediction]:1.8874
+2022-05-29 12:33:58,762 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [15100/2000000], [15100/44500]:Losses:[train_prediction]:2.7700
+2022-05-29 12:34:08,921 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [15200/2000000], [15200/44500]:Losses:[train_prediction]:1.9115
+2022-05-29 12:34:19,195 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.100/D:0.003], Total Iter [15300/2000000], [15300/44500]:Losses:[train_prediction]:2.1391
+2022-05-29 12:34:29,374 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [15400/2000000], [15400/44500]:Losses:[train_prediction]:3.1959
+2022-05-29 12:34:39,731 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [15500/2000000], [15500/44500]:Losses:[train_prediction]:1.8971
+2022-05-29 12:34:49,946 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [15600/2000000], [15600/44500]:Losses:[train_prediction]:2.1757
+2022-05-29 12:35:00,271 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [15700/2000000], [15700/44500]:Losses:[train_prediction]:2.4172
+2022-05-29 12:35:10,519 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [15800/2000000], [15800/44500]:Losses:[train_prediction]:1.9229
+2022-05-29 12:35:20,649 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [15900/2000000], [15900/44500]:Losses:[train_prediction]:2.5110
+2022-05-29 12:35:31,088 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.102/D:0.003], Total Iter [16000/2000000], [16000/44500]:Losses:[train_prediction]:3.2107
+2022-05-29 12:40:52,737 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:321.351[T:0.033/D:321.318], Total Iter [16000/2000000], [16000/44500]:Losses:[val_prediction]:2.3634; Evaluations:[val_accuracy_1]:0.3671, [val_accuracy_5]:0.7121
+2022-05-29 12:40:52,786 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 12:40:53,802 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 12:41:05,070 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [16100/2000000], [16100/44500]:Losses:[train_prediction]:1.6053
+2022-05-29 12:41:15,264 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [16200/2000000], [16200/44500]:Losses:[train_prediction]:2.7780
+2022-05-29 12:41:25,463 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [16300/2000000], [16300/44500]:Losses:[train_prediction]:1.8063
+2022-05-29 12:41:35,726 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [16400/2000000], [16400/44500]:Losses:[train_prediction]:2.6752
+2022-05-29 12:41:46,016 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [16500/2000000], [16500/44500]:Losses:[train_prediction]:3.0065
+2022-05-29 12:41:56,401 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [16600/2000000], [16600/44500]:Losses:[train_prediction]:2.6617
+2022-05-29 12:42:06,703 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [16700/2000000], [16700/44500]:Losses:[train_prediction]:2.4075
+2022-05-29 12:42:16,940 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.101/D:0.003], Total Iter [16800/2000000], [16800/44500]:Losses:[train_prediction]:2.2501
+2022-05-29 12:42:27,152 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [16900/2000000], [16900/44500]:Losses:[train_prediction]:2.7509
+2022-05-29 12:42:37,352 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [17000/2000000], [17000/44500]:Losses:[train_prediction]:3.2304
+2022-05-29 12:42:47,591 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [17100/2000000], [17100/44500]:Losses:[train_prediction]:2.2018
+2022-05-29 12:42:57,875 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [17200/2000000], [17200/44500]:Losses:[train_prediction]:3.3149
+2022-05-29 12:43:08,286 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [17300/2000000], [17300/44500]:Losses:[train_prediction]:1.9885
+2022-05-29 12:43:18,604 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [17400/2000000], [17400/44500]:Losses:[train_prediction]:2.6556
+2022-05-29 12:43:28,801 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [17500/2000000], [17500/44500]:Losses:[train_prediction]:2.0731
+2022-05-29 12:43:39,032 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.101/D:0.003], Total Iter [17600/2000000], [17600/44500]:Losses:[train_prediction]:1.7890
+2022-05-29 12:43:49,249 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [17700/2000000], [17700/44500]:Losses:[train_prediction]:2.1157
+2022-05-29 12:43:59,558 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [17800/2000000], [17800/44500]:Losses:[train_prediction]:1.8094
+2022-05-29 12:44:09,720 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [17900/2000000], [17900/44500]:Losses:[train_prediction]:1.9114
+2022-05-29 12:44:19,978 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [18000/2000000], [18000/44500]:Losses:[train_prediction]:1.4895
+2022-05-29 12:49:41,145 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:320.797[T:0.033/D:320.764], Total Iter [18000/2000000], [18000/44500]:Losses:[val_prediction]:2.2119; Evaluations:[val_accuracy_1]:0.3999, [val_accuracy_5]:0.7421
+2022-05-29 12:49:41,195 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 12:49:42,222 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 12:49:53,567 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [18100/2000000], [18100/44500]:Losses:[train_prediction]:2.8500
+2022-05-29 12:50:03,788 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [18200/2000000], [18200/44500]:Losses:[train_prediction]:1.6641
+2022-05-29 12:50:13,935 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [18300/2000000], [18300/44500]:Losses:[train_prediction]:1.4531
+2022-05-29 12:50:24,161 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [18400/2000000], [18400/44500]:Losses:[train_prediction]:2.3139
+2022-05-29 12:50:34,360 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [18500/2000000], [18500/44500]:Losses:[train_prediction]:2.5780
+2022-05-29 12:50:44,553 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [18600/2000000], [18600/44500]:Losses:[train_prediction]:1.0635
+2022-05-29 12:50:55,031 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.104[T:0.101/D:0.003], Total Iter [18700/2000000], [18700/44500]:Losses:[train_prediction]:2.3090
+2022-05-29 12:51:05,276 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [18800/2000000], [18800/44500]:Losses:[train_prediction]:2.5150
+2022-05-29 12:51:15,447 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [18900/2000000], [18900/44500]:Losses:[train_prediction]:1.9730
+2022-05-29 12:51:25,652 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [19000/2000000], [19000/44500]:Losses:[train_prediction]:2.3006
+2022-05-29 12:51:35,910 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [19100/2000000], [19100/44500]:Losses:[train_prediction]:1.7871
+2022-05-29 12:51:46,138 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [19200/2000000], [19200/44500]:Losses:[train_prediction]:2.6050
+2022-05-29 12:51:56,424 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [19300/2000000], [19300/44500]:Losses:[train_prediction]:1.6195
+2022-05-29 12:52:06,558 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [19400/2000000], [19400/44500]:Losses:[train_prediction]:2.2278
+2022-05-29 12:52:16,714 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [19500/2000000], [19500/44500]:Losses:[train_prediction]:2.1768
+2022-05-29 12:52:26,880 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [19600/2000000], [19600/44500]:Losses:[train_prediction]:2.4502
+2022-05-29 12:52:37,223 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [19700/2000000], [19700/44500]:Losses:[train_prediction]:1.6305
+2022-05-29 12:52:47,582 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [19800/2000000], [19800/44500]:Losses:[train_prediction]:2.2654
+2022-05-29 12:52:57,975 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [19900/2000000], [19900/44500]:Losses:[train_prediction]:2.0036
+2022-05-29 12:53:08,172 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [20000/2000000], [20000/44500]:Losses:[train_prediction]:3.1956
+2022-05-29 12:58:32,534 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:324.000[T:0.033/D:323.966], Total Iter [20000/2000000], [20000/44500]:Losses:[val_prediction]:2.1854; Evaluations:[val_accuracy_1]:0.4097, [val_accuracy_5]:0.7474
+2022-05-29 12:58:32,580 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 12:58:33,597 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 12:58:34,586 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/iter_20000_ckpt.pth.tar
+2022-05-29 12:58:45,728 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [20100/2000000], [20100/44500]:Losses:[train_prediction]:2.7046
+2022-05-29 12:58:56,031 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [20200/2000000], [20200/44500]:Losses:[train_prediction]:2.0746
+2022-05-29 12:59:06,290 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [20300/2000000], [20300/44500]:Losses:[train_prediction]:1.7019
+2022-05-29 12:59:16,470 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [20400/2000000], [20400/44500]:Losses:[train_prediction]:2.0205
+2022-05-29 12:59:26,685 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [20500/2000000], [20500/44500]:Losses:[train_prediction]:2.5384
+2022-05-29 12:59:36,881 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [20600/2000000], [20600/44500]:Losses:[train_prediction]:2.8982
+2022-05-29 12:59:47,000 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [20700/2000000], [20700/44500]:Losses:[train_prediction]:2.5231
+2022-05-29 12:59:57,205 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [20800/2000000], [20800/44500]:Losses:[train_prediction]:2.2441
+2022-05-29 13:00:07,640 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [20900/2000000], [20900/44500]:Losses:[train_prediction]:1.4304
+2022-05-29 13:00:18,033 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [21000/2000000], [21000/44500]:Losses:[train_prediction]:2.7679
+2022-05-29 13:00:28,352 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [21100/2000000], [21100/44500]:Losses:[train_prediction]:1.9475
+2022-05-29 13:00:38,659 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [21200/2000000], [21200/44500]:Losses:[train_prediction]:1.9213
+2022-05-29 13:00:49,036 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [21300/2000000], [21300/44500]:Losses:[train_prediction]:2.2016
+2022-05-29 13:00:59,302 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [21400/2000000], [21400/44500]:Losses:[train_prediction]:1.8036
+2022-05-29 13:01:09,523 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [21500/2000000], [21500/44500]:Losses:[train_prediction]:2.0104
+2022-05-29 13:01:19,676 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [21600/2000000], [21600/44500]:Losses:[train_prediction]:2.9459
+2022-05-29 13:01:29,834 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [21700/2000000], [21700/44500]:Losses:[train_prediction]:2.1686
+2022-05-29 13:01:40,001 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [21800/2000000], [21800/44500]:Losses:[train_prediction]:2.5455
+2022-05-29 13:01:50,206 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [21900/2000000], [21900/44500]:Losses:[train_prediction]:1.9535
+2022-05-29 13:02:00,526 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [22000/2000000], [22000/44500]:Losses:[train_prediction]:1.8557
+2022-05-29 13:07:21,629 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:320.814[T:0.033/D:320.781], Total Iter [22000/2000000], [22000/44500]:Losses:[val_prediction]:2.0821; Evaluations:[val_accuracy_1]:0.4292, [val_accuracy_5]:0.7689
+2022-05-29 13:07:21,677 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 13:07:22,684 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 13:07:33,997 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.103/D:0.003], Total Iter [22100/2000000], [22100/44500]:Losses:[train_prediction]:1.5574
+2022-05-29 13:07:44,300 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [22200/2000000], [22200/44500]:Losses:[train_prediction]:2.0800
+2022-05-29 13:07:54,514 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [22300/2000000], [22300/44500]:Losses:[train_prediction]:1.9502
+2022-05-29 13:08:04,712 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [22400/2000000], [22400/44500]:Losses:[train_prediction]:1.5691
+2022-05-29 13:08:14,845 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [22500/2000000], [22500/44500]:Losses:[train_prediction]:1.6469
+2022-05-29 13:08:25,109 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [22600/2000000], [22600/44500]:Losses:[train_prediction]:2.0948
+2022-05-29 13:08:35,274 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [22700/2000000], [22700/44500]:Losses:[train_prediction]:2.0074
+2022-05-29 13:08:45,482 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [22800/2000000], [22800/44500]:Losses:[train_prediction]:3.5519
+2022-05-29 13:08:55,862 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.107[T:0.104/D:0.003], Total Iter [22900/2000000], [22900/44500]:Losses:[train_prediction]:1.6612
+2022-05-29 13:09:06,143 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [23000/2000000], [23000/44500]:Losses:[train_prediction]:2.0274
+2022-05-29 13:09:16,361 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [23100/2000000], [23100/44500]:Losses:[train_prediction]:1.6876
+2022-05-29 13:09:26,545 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [23200/2000000], [23200/44500]:Losses:[train_prediction]:1.8997
+2022-05-29 13:09:36,821 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [23300/2000000], [23300/44500]:Losses:[train_prediction]:2.1581
+2022-05-29 13:09:46,974 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [23400/2000000], [23400/44500]:Losses:[train_prediction]:1.2918
+2022-05-29 13:09:57,340 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [23500/2000000], [23500/44500]:Losses:[train_prediction]:1.5508
+2022-05-29 13:10:07,594 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [23600/2000000], [23600/44500]:Losses:[train_prediction]:1.4816
+2022-05-29 13:10:17,915 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [23700/2000000], [23700/44500]:Losses:[train_prediction]:2.0683
+2022-05-29 13:10:28,281 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [23800/2000000], [23800/44500]:Losses:[train_prediction]:1.7120
+2022-05-29 13:10:38,459 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.101/D:0.003], Total Iter [23900/2000000], [23900/44500]:Losses:[train_prediction]:1.8791
+2022-05-29 13:10:48,657 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [24000/2000000], [24000/44500]:Losses:[train_prediction]:1.7507
+2022-05-29 13:16:13,120 - trainer.py[line:569] - INFO: Validate Epoch 1, Time:324.166[T:0.035/D:324.131], Total Iter [24000/2000000], [24000/44500]:Losses:[val_prediction]:2.0300; Evaluations:[val_accuracy_1]:0.4448, [val_accuracy_5]:0.7849
+2022-05-29 13:16:13,169 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/latest_ckpt.pth.tar
+2022-05-29 13:16:14,192 - trainer.py[line:530] - INFO: Saving checkpoint to model_logs/sketch_transformer/202205291129_sketch_albert_qd_struct_8_12_768_test_mask_max_scale/best_ckpt.pth.tar
+2022-05-29 13:16:25,388 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [24100/2000000], [24100/44500]:Losses:[train_prediction]:2.5366
+2022-05-29 13:16:35,494 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [24200/2000000], [24200/44500]:Losses:[train_prediction]:1.6566
+2022-05-29 13:16:45,691 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [24300/2000000], [24300/44500]:Losses:[train_prediction]:1.4367
+2022-05-29 13:16:55,947 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [24400/2000000], [24400/44500]:Losses:[train_prediction]:2.0349
+2022-05-29 13:17:06,182 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [24500/2000000], [24500/44500]:Losses:[train_prediction]:2.0234
+2022-05-29 13:17:16,376 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [24600/2000000], [24600/44500]:Losses:[train_prediction]:1.6812
+2022-05-29 13:17:26,611 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [24700/2000000], [24700/44500]:Losses:[train_prediction]:2.7912
+2022-05-29 13:17:36,871 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [24800/2000000], [24800/44500]:Losses:[train_prediction]:2.0486
+2022-05-29 13:17:47,058 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [24900/2000000], [24900/44500]:Losses:[train_prediction]:1.9275
+2022-05-29 13:17:57,400 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.105[T:0.102/D:0.003], Total Iter [25000/2000000], [25000/44500]:Losses:[train_prediction]:1.1074
+2022-05-29 13:18:07,660 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [25100/2000000], [25100/44500]:Losses:[train_prediction]:2.4306
+2022-05-29 13:18:17,894 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [25200/2000000], [25200/44500]:Losses:[train_prediction]:1.6963
+2022-05-29 13:18:28,073 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [25300/2000000], [25300/44500]:Losses:[train_prediction]:1.9720
+2022-05-29 13:18:38,266 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [25400/2000000], [25400/44500]:Losses:[train_prediction]:2.3809
+2022-05-29 13:18:48,440 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [25500/2000000], [25500/44500]:Losses:[train_prediction]:2.0801
+2022-05-29 13:18:58,611 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.098/D:0.003], Total Iter [25600/2000000], [25600/44500]:Losses:[train_prediction]:1.8781
+2022-05-29 13:19:08,880 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [25700/2000000], [25700/44500]:Losses:[train_prediction]:1.8208
+2022-05-29 13:19:19,108 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [25800/2000000], [25800/44500]:Losses:[train_prediction]:2.1755
+2022-05-29 13:19:29,320 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.102[T:0.099/D:0.003], Total Iter [25900/2000000], [25900/44500]:Losses:[train_prediction]:1.7286
+2022-05-29 13:19:39,617 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.101[T:0.099/D:0.003], Total Iter [26000/2000000], [26000/44500]:Losses:[train_prediction]:2.0139

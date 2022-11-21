@@ -1,0 +1,87 @@
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset oracle5 --batch-fs 1 \
+--epochs 0 --manifold-mixup 80 --rotations --cosine --gamma 0.8 --milestones 10 --n-runs 1 \
+--batch-size 128 --preprocessing ME --n-shots 1 --n-queries 19 --skip-epochs 0 --save-model "save/glad.pt5"
+Using pytorch version: 1.11.0
+Importing local files: args, utils, datasets, eval_few_shot, models.
+Namespace(batch_size=128, batch_fs=1, feature_maps=64, lr=0.1, epochs=0, milestones=[10, 20, 30, 40, 50, 60, 70], gamma=0.8, cosine=True, mixup=False, mm=False, label_smoothing=0, dropout=0, rotations=True, model='ResNet18', preprocessing='ME', postprocessing='', manifold_mixup=80, temperature=1.0, ema=0, device='cuda:0', dataset_path='/remote-home/jianghaitian/NNDLfinal/oracle_fs/img/oracle_200_1_shot_strokes/train/', dataset_device='cuda:0', deterministic=False, skip_epochs=0, runs=1, quiet=False, dataset='oracle5', dataset_size=-1, output='', save_features='', save_model='save/glad.pt5', test_features='', load_model='', seed=12, wandb='', n_shots=[1], n_runs=1, n_ways=5, n_queries=19, sample_aug=1, ncm_loss=False, episodic=False, episodes_per_epoch=100, transductive=False, transductive_softkmeans=False, transductive_n_iter=50, transductive_n_iter_sinkhorn=200, transductive_temperature=14, transductive_temperature_softkmeans=20, transductive_alpha=0.84, transductive_cosine=False, devices=[0])
+Number of trainable parameters in model is: 11273484
+   1 loss: 3.14103 test acc: 1.80%e: 0h00m46s lr: 0.09759
+   2 loss: 2.21377 test acc: 19.07%: 0h01m29s lr: 0.09052
+   3 loss: 1.45881 test acc: 41.88%: 0h02m03s lr: 0.07949
+   4 loss: 0.95137 test acc: 39.00%: 0h02m36s lr: 0.06557
+   5 loss: 0.61403 test acc: 57.40%: 0h03m09s lr: 0.05013
+   6 loss: 0.42704 test acc: 63.90%: 0h03m42s lr: 0.03467
+   7 loss: 0.28761 test acc: 65.60%: 0h04m15s lr: 0.02071
+   8 loss: 0.22006 test acc: 68.00%: 0h04m48s lr: 0.00962
+   9 loss: 0.15721 test acc: 69.67%: 0h05m22s lr: 0.00249
+  10 loss: 0.14096 test acc: 69.23%: 0h05m55s lr: 0.00000
+  11 loss: 0.37413 test acc: 61.12%: 0h06m28s lr: 0.07807
+  12 loss: 0.28032 test acc: 61.25%: 0h07m02s lr: 0.07242
+  13 loss: 0.29039 test acc: 66.90%: 0h07m35s lr: 0.06359
+  14 loss: 0.17201 test acc: 67.95%: 0h08m08s lr: 0.05246
+  15 loss: 0.12487 test acc: 70.55%: 0h08m41s lr: 0.04010
+  16 loss: 0.09370 test acc: 62.82%: 0h09m15s lr: 0.02773
+  17 loss: 0.08463 test acc: 72.42%: 0h09m48s lr: 0.01657
+  18 loss: 0.05697 test acc: 73.38%: 0h10m21s lr: 0.00770
+  19 loss: 0.05056 test acc: 73.72%: 0h10m54s lr: 0.00199
+  20 loss: 0.04561 test acc: 73.65%: 0h11m27s lr: 0.00000
+  21 loss: 0.13377 test acc: 63.90%: 0h12m00s lr: 0.06246
+  22 loss: 0.13346 test acc: 66.85%: 0h12m33s lr: 0.05794
+  23 loss: 0.09576 test acc: 63.42%: 0h13m06s lr: 0.05087
+  24 loss: 0.08022 test acc: 72.22%: 0h13m39s lr: 0.04197
+  25 loss: 0.06779 test acc: 67.55%: 0h14m12s lr: 0.03208
+  26 loss: 0.05802 test acc: 72.52%: 0h14m45s lr: 0.02219
+  27 loss: 0.04519 test acc: 73.70%: 0h15m18s lr: 0.01326
+  28 loss: 0.03399 test acc: 73.35%: 0h15m51s lr: 0.00616
+  29 loss: 0.02935 test acc: 73.65%: 0h16m24s lr: 0.00159
+  30 loss: 0.02727 test acc: 74.15%: 0h16m57s lr: 0.00000
+  31 loss: 0.07259 test acc: 70.38%: 0h17m30s lr: 0.04997
+  32 loss: 0.11044 test acc: 69.92%: 0h18m04s lr: 0.04635
+  33 loss: 0.06945 test acc: 72.12%: 0h18m36s lr: 0.04070
+  34 loss: 0.04940 test acc: 73.22%: 0h19m10s lr: 0.03357
+  35 loss: 0.04773 test acc: 73.15%: 0h19m43s lr: 0.02566
+  36 loss: 0.03401 test acc: 75.12%: 0h20m21s lr: 0.01775
+  37 loss: 0.03162 test acc: 75.17%: 0h21m04s lr: 0.01060
+  38 loss: 0.02330 test acc: 73.45%: 0h21m45s lr: 0.00493
+  39 loss: 0.02112 test acc: 75.10%: 0h22m29s lr: 0.00127
+  40 loss: 0.02008 test acc: 74.92%: 0h23m11s lr: 0.00000
+  41 loss: 0.05154 test acc: 70.03%: 0h23m53s lr: 0.03997
+  42 loss: 0.05457 test acc: 68.08%: 0h24m37s lr: 0.03708
+  43 loss: 0.04694 test acc: 70.67%: 0h25m20s lr: 0.03256
+  44 loss: 0.03724 test acc: 72.85%: 0h26m04s lr: 0.02686
+  45 loss: 0.03212 test acc: 72.60%: 0h26m47s lr: 0.02053
+  46 loss: 0.02757 test acc: 71.70%: 0h27m31s lr: 0.01420
+  47 loss: 0.02106 test acc: 74.83%: 0h28m13s lr: 0.00848
+  48 loss: 0.01846 test acc: 75.48%: 0h28m56s lr: 0.00394
+  49 loss: 0.01672 test acc: 75.52%: 0h29m37s lr: 0.00102
+  50 loss: 0.01586 test acc: 75.35%: 0h30m20s lr: 0.00000
+  51 loss: 0.06907 test acc: 73.20%: 0h31m05s lr: 0.03198
+  52 loss: 0.04780 test acc: 70.80%: 0h31m47s lr: 0.02966
+  53 loss: 0.03753 test acc: 72.50%: 0h32m30s lr: 0.02605
+  54 loss: 0.03292 test acc: 73.00%: 0h33m12s lr: 0.02149
+  55 loss: 0.02353 test acc: 75.17%: 0h33m55s lr: 0.01643
+  56 loss: 0.02197 test acc: 73.85%: 0h34m38s lr: 0.01136
+  57 loss: 0.01887 test acc: 75.58%: 0h35m20s lr: 0.00679
+  58 loss: 0.01651 test acc: 75.58%: 0h36m02s lr: 0.00315
+  59 loss: 0.01439 test acc: 76.40%: 0h36m45s lr: 0.00081
+  60 loss: 0.01388 test acc: 76.02%: 0h37m28s lr: 0.00000
+  61 loss: 0.03376 test acc: 67.03%: 0h38m11s lr: 0.02558
+  62 loss: 0.02999 test acc: 72.42%: 0h38m55s lr: 0.02373
+  63 loss: 0.03295 test acc: 72.40%: 0h39m37s lr: 0.02084
+  64 loss: 0.03096 test acc: 72.85%: 0h40m20s lr: 0.01719
+  65 loss: 0.02374 test acc: 75.35%: 0h41m02s lr: 0.01314
+  66 loss: 0.01855 test acc: 74.00%: 0h41m46s lr: 0.00909
+  67 loss: 0.01636 test acc: 74.72%: 0h42m31s lr: 0.00543
+  68 loss: 0.01516 test acc: 73.95%: 0h43m13s lr: 0.00252
+  69 loss: 0.01319 test acc: 75.50%: 0h43m56s lr: 0.00065
+  70 loss: 0.01240 test acc: 75.50%: 0h44m38s lr: 0.00000
+  71 loss: 0.02645 test acc: 73.05%: 0h45m20s lr: 0.02047
+  72 loss: 0.02630 test acc: 73.58%: 0h46m03s lr: 0.01898
+  73 loss: 0.02359 test acc: 73.00%: 0h46m45s lr: 0.01667
+  74 loss: 0.02286 test acc: 74.95%: 0h47m27s lr: 0.01375
+  75 loss: 0.01960 test acc: 75.00%: 0h48m11s lr: 0.01051
+  76 loss: 0.01567 test acc: 75.75%: 0h48m53s lr: 0.00727
+  77 loss: 0.01411 test acc: 74.67%: 0h49m35s lr: 0.00434
+  78 loss: 0.01280 test acc: 75.65%: 0h50m17s lr: 0.00202
+  79 loss: 0.01204 test acc: 75.40%: 0h51m01s lr: 0.00052
+  80 loss: 0.01156 test acc: 76.22%: 0h51m43s lr: 0.00000

@@ -1,0 +1,88 @@
+# CUDA_VISIBLE_DEVICES=1 python main.py --dataset oracle3 --batch-fs 1 \
+--epochs 0 --manifold-mixup 80 --rotations --cosine --gamma 0.8 --milestones 20 --n-runs 1 \
+--batch-size 128 --preprocessing ME --n-shots 1 --n-queries 19 --skip-epochs 0 Using pytorch version: 1.11.0
+Importing local files: args, utils, datasets, eval_few_shot, models.
+Namespace(batch_size=128, batch_fs=1, feature_maps=64, lr=0.1, epochs=0, milestones=[20, 40, 60], gamma=0.8, cosine=True, mixup=False, mm=False, label_smoothing=0, dropout=0, rotations=True, model='ResNet18', preprocessing='ME', postprocessing='', manifold_mixup=80, temperature=1.0, ema=0, device='cuda:0', dataset_path='/remote-home/jianghaitian/NNDLfinal/oracle_fs/img/oracle_200_1_shot_strokes/train/', dataset_device='cuda:0', deterministic=False, skip_epochs=0, runs=1, quiet=False, dataset='oracle3', dataset_size=-1, output='', save_features='', save_model='', test_features='', load_model='', seed=12, wandb='', n_shots=[1], n_runs=1, n_ways=5, n_queries=19, sample_aug=1, ncm_loss=False, episodic=False, episodes_per_epoch=100, transductive=False, transductive_softkmeans=False, transductive_n_iter=50, transductive_n_iter_sinkhorn=200, transductive_temperature=14, transductive_temperature_softkmeans=20, transductive_alpha=0.84, transductive_cosine=False, devices=[0])
+Number of trainable parameters in model is: 11273484
+   1 loss: 2.92853 test acc: 5.35%e: 0h01m00s lr: 0.09939
+   2 loss: 1.76377 test acc: 20.38%: 0h01m59s lr: 0.09756
+   3 loss: 0.73476 test acc: 23.47%: 0h02m56s lr: 0.09457
+   4 loss: 0.36167 test acc: 33.85%: 0h03m56s lr: 0.09047
+   5 loss: 0.23637 test acc: 40.92%: 0h04m53s lr: 0.08538
+   6 loss: 0.16295 test acc: 51.25%: 0h05m50s lr: 0.07942
+   7 loss: 0.13570 test acc: 47.65%: 0h06m45s lr: 0.07273
+   8 loss: 0.11497 test acc: 55.80%: 0h07m44s lr: 0.06549
+   9 loss: 0.08661 test acc: 57.27%: 0h08m39s lr: 0.05786
+  10 loss: 0.08271 test acc: 58.20%: 0h09m35s lr: 0.05004
+  11 loss: 0.06899 test acc: 54.97%: 0h10m33s lr: 0.04221
+  12 loss: 0.05356 test acc: 59.23%: 0h11m31s lr: 0.03458
+  13 loss: 0.05138 test acc: 58.27%: 0h12m28s lr: 0.02733
+  14 loss: 0.04286 test acc: 58.50%: 0h13m27s lr: 0.02064
+  15 loss: 0.03558 test acc: 58.60%: 0h14m26s lr: 0.01467
+  16 loss: 0.02876 test acc: 59.70%: 0h15m23s lr: 0.00957
+  17 loss: 0.02406 test acc: 61.88%: 0h16m22s lr: 0.00547
+  18 loss: 0.02129 test acc: 61.15%: 0h17m26s lr: 0.00246
+  19 loss: 0.01977 test acc: 62.10%: 0h18m27s lr: 0.00062
+  20 loss: 0.01897 test acc: 61.92%: 0h19m29s lr: 0.00000
+  21 loss: 0.12055 test acc: 45.15%: 0h20m31s lr: 0.07951
+  22 loss: 0.09510 test acc: 52.52%: 0h21m33s lr: 0.07805
+  23 loss: 0.07284 test acc: 39.60%: 0h22m34s lr: 0.07565
+  24 loss: 0.06827 test acc: 56.05%: 0h23m35s lr: 0.07238
+  25 loss: 0.07516 test acc: 59.80%: 0h24m36s lr: 0.06830
+  26 loss: 0.05580 test acc: 59.90%: 0h25m36s lr: 0.06353
+  27 loss: 0.05144 test acc: 56.55%: 0h26m37s lr: 0.05819
+  28 loss: 0.04386 test acc: 55.70%: 0h27m37s lr: 0.05239
+  29 loss: 0.06800 test acc: 58.03%: 0h28m37s lr: 0.04629
+  30 loss: 0.05716 test acc: 58.45%: 0h29m37s lr: 0.04003
+  31 loss: 0.03790 test acc: 58.70%: 0h30m38s lr: 0.03377
+  32 loss: 0.02571 test acc: 61.70%: 0h31m39s lr: 0.02767
+  33 loss: 0.03978 test acc: 60.62%: 0h32m39s lr: 0.02187
+  34 loss: 0.02353 test acc: 62.28%: 0h33m39s lr: 0.01651
+  35 loss: 0.01847 test acc: 63.42%: 0h34m38s lr: 0.01174
+  36 loss: 0.01521 test acc: 63.30%: 0h35m38s lr: 0.00766
+  37 loss: 0.01356 test acc: 63.48%: 0h36m38s lr: 0.00437
+  38 loss: 0.01235 test acc: 64.80%: 0h37m38s lr: 0.00197
+  39 loss: 0.01136 test acc: 64.78%: 0h38m41s lr: 0.00050
+  40 loss: 0.01110 test acc: 64.55%: 0h39m41s lr: 0.00000
+  41 loss: 0.10869 test acc: 57.80%: 0h40m41s lr: 0.06361
+  42 loss: 0.06184 test acc: 54.20%: 0h41m40s lr: 0.06244
+  43 loss: 0.06842 test acc: 56.15%: 0h42m41s lr: 0.06052
+  44 loss: 0.06909 test acc: 58.98%: 0h43m42s lr: 0.05790
+  45 loss: 0.05816 test acc: 58.90%: 0h44m43s lr: 0.05464
+  46 loss: 0.03885 test acc: 59.48%: 0h45m43s lr: 0.05083
+  47 loss: 0.03600 test acc: 60.12%: 0h46m44s lr: 0.04655
+  48 loss: 0.03561 test acc: 60.12%: 0h47m45s lr: 0.04191
+  49 loss: 0.02536 test acc: 59.72%: 0h48m48s lr: 0.03703
+  50 loss: 0.02482 test acc: 63.65%: 0h49m48s lr: 0.03202
+  51 loss: 0.02038 test acc: 61.38%: 0h50m46s lr: 0.02702
+  52 loss: 0.01860 test acc: 63.42%: 0h51m45s lr: 0.02213
+  53 loss: 0.01691 test acc: 63.80%: 0h52m45s lr: 0.01749
+  54 loss: 0.01383 test acc: 65.97%: 0h53m44s lr: 0.01321
+  55 loss: 0.01279 test acc: 64.45%: 0h54m45s lr: 0.00939
+  56 loss: 0.01095 test acc: 65.08%: 0h55m45s lr: 0.00613
+  57 loss: 0.00996 test acc: 65.58%: 0h56m44s lr: 0.00350
+  58 loss: 0.00912 test acc: 65.85%: 0h57m43s lr: 0.00157
+  59 loss: 0.00902 test acc: 66.00%: 0h58m42s lr: 0.00040
+  60 loss: 0.00867 test acc: 65.88%: 0h59m42s lr: 0.00000
+  61 loss: 0.07167 test acc: 57.35%: 1h00m43s lr: 0.05089
+  62 loss: 0.04340 test acc: 61.10%: 1h01m44s lr: 0.04995
+  63 loss: 0.08686 test acc: 57.77%: 1h02m45s lr: 0.04842
+  64 loss: 0.05969 test acc: 29.12%: 1h03m45s lr: 0.04632
+  65 loss: 0.03778 test acc: 58.00%: 1h04m44s lr: 0.04372
+  66 loss: 0.03116 test acc: 62.45%: 1h05m44s lr: 0.04066
+  67 loss: 0.02942 test acc: 59.13%: 1h06m44s lr: 0.03724
+  68 loss: 0.02130 test acc: 63.52%: 1h07m44s lr: 0.03353
+  69 loss: 0.02361 test acc: 62.10%: 1h08m47s lr: 0.02962
+  70 loss: 0.02149 test acc: 63.10%: 1h09m49s lr: 0.02562
+  71 loss: 0.01668 test acc: 64.08%: 1h10m50s lr: 0.02161
+  72 loss: 0.02128 test acc: 65.15%: 1h11m49s lr: 0.01771
+  73 loss: 0.01291 test acc: 65.10%: 1h12m48s lr: 0.01399
+  74 loss: 0.01167 test acc: 65.83%: 1h13m48s lr: 0.01057
+  75 loss: 0.01007 test acc: 66.62%: 1h14m47s lr: 0.00751
+  76 loss: 0.00893 test acc: 66.45%: 1h15m46s lr: 0.00490
+  77 loss: 0.00851 test acc: 66.50%: 1h16m46s lr: 0.00280
+  78 loss: 0.00798 test acc: 66.75%: 1h17m46s lr: 0.00126
+  79 loss: 0.00783 test acc: 66.40%: 1h18m46s lr: 0.00032
+  80 loss: 0.00742 test acc: 67.03%: 1h19m46s lr: 0.00000
+Run 1 / 1
+Top-1 67.03 (± 0.00) (conf: [0.00, 100.00]) (worst: 67.03, best: 67.03)

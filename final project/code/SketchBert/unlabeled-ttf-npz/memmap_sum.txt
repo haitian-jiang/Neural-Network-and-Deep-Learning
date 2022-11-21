@@ -1,0 +1,1 @@
+ttf/memmap/oracle_source_seq.dat	524451

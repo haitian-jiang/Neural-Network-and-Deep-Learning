@@ -1,0 +1,74 @@
+2022-05-23 10:55:24,526 - main.py[line:53] - INFO: {trainer: sketch_transformer, batch_size: 10, num_iterations: 200000, num_epoch: 20, learning_rate: 0.0001, gpu_ids: [0], task_types: ['sketchclsinput'], get_type: single, mask_task_type: task, load_pretrained: pretrained, which_pretrained: ['enc_net'], restore_checkpoint_path: latest_ckpt.pth, dataset: quickdraw_memmap, num_train_samples: 20000000, num_val_samples: 10, num_display_samples: 10, shuffle_val: False, loader_num_workers: 4, sum_path: Oracle5/memmap_sum.txt, offset_path: Oracle5/offsets.npz, cls_limit_path: , mode: train, max_length: 250, max_size: [128, 128], image_size: 224, type_size: 3, mask_prob: 0.85, limit: 1000, stroke_type: stroke-5, input_is_complete: False, max_cls_cache: 345, normalization_type: max_scale, max_scale_factor: 10, each_max_samples: 5000, each_image_max_samples: 100, each_val_samples: 1000, print_every: 100, log_dir: sketch_albert_qd_struct_8_12_768_test_mask_max_scale, checkpoint_every: 2000, save_model_every: 20000, encoder_type: Ori, layers_setting: [[12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072], [12, 768, 3072]], output_attentions: False, output_all_states: False, keep_multihead_output: False, input_dim: 5, cls_dim: 345, latent_dim: 128, rel_feat_dim: 128, M: 16, embed_layers_setting: [128, 256, 512], rel_layers_setting: [], cls_layers_setting: [], rec_layers_setting: [512, 256, 128], sketch_embed_type: linear, embed_pool_type: sum, model_type: albert, position_type: learn, segment_type: none, atten_type: single, attention_norm_type: LN, inter_activation: gelu, attention_dropout_prob: 0.5, hidden_dropout_prob: 0.5, output_dropout_prob: 0.5, triplet_margin: 2.0, gamma: 0.1, mask_gmm_weight: 1, rec_gmm_weight: 0, mask_axis_weight: 1, rec_axis_weight: 0, mask_type_weight: 1, rec_type_weight: 0, prediction_weight: 1, triplet_weight: 1, }
+2022-05-23 10:55:24,526 - main.py[line:56] - INFO: Initialize the dataset...
+2022-05-23 10:55:24,532 - __init__.py[line:257] - INFO: There are 100 iterations per epoch
+2022-05-23 10:55:24,532 - __init__.py[line:258] - INFO: Training dataset has 1000 images.
+2022-05-23 10:55:24,538 - __init__.py[line:265] - INFO: Val dataset has 1000 images.
+2022-05-23 10:55:24,878 - main.py[line:66] - INFO: Finish the dataset initialization.
+2022-05-23 10:55:25,076 - trainer.py[line:56] - INFO: Defining Network Structure...
+2022-05-23 10:55:25,168 - trainer.py[line:69] - INFO: Sketch Transformer Sturture:
+SketchTransformerModel(
+  (embedding): SketchEmbedding(
+    (embedding): Linear(in_features=5, out_features=128, bias=True)
+  )
+  (pos_embedding): SketchLearnPositionEmbedding(
+    (pos_embedding): Embedding(251, 128)
+  )
+  (embed_refine_net): SketchEmbeddingRefineNetwork(
+    (layers): ModuleList(
+      (0): Linear(in_features=128, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=512, bias=True)
+      (2): Linear(in_features=512, out_features=768, bias=True)
+    )
+  )
+  (encoder): SketchALEncoder(
+    (sketch_layer): SketchLayer(
+      (attention): SketchMultiHeadAttention(
+        (attention): SketchSelfAttention(
+          (query): Linear(in_features=768, out_features=768, bias=True)
+          (key): Linear(in_features=768, out_features=768, bias=True)
+          (value): Linear(in_features=768, out_features=768, bias=True)
+          (dropout): Dropout(p=0.5, inplace=False)
+        )
+        (output): SketchOutput(
+          (fc): Linear(in_features=768, out_features=768, bias=True)
+          (norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.5, inplace=False)
+        )
+      )
+      (inter_layer): SketchIntermediate(
+        (fc): Linear(in_features=768, out_features=3072, bias=True)
+      )
+      (output): SketchOutput(
+        (fc): Linear(in_features=3072, out_features=768, bias=True)
+        (norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+)
+2022-05-23 10:55:30,907 - trainer.py[line:88] - INFO: Finish Construction of Networks.
+2022-05-23 10:55:30,909 - trainer.py[line:100] - INFO: Finish Construction of Optimizers.
+2022-05-23 10:55:30,909 - trainer.py[line:103] - INFO: Defining Losses...
+2022-05-23 10:55:30,910 - trainer.py[line:108] - INFO: Finish Losses.
+2022-05-23 10:55:30,910 - trainer.py[line:133] - INFO: Restoring from checkpoint:latest_ckpt.pth
+2022-05-23 10:55:30,993 - trainer.py[line:137] - INFO: Restoring netE
+2022-05-23 10:55:43,429 - trainer.py[line:569] - INFO: Train Epoch 1, Time:0.103[T:0.100/D:0.003], Total Iter [100/200000], [100/100]:Losses:[train_prediction]:5.4285
+2022-05-23 10:55:54,520 - trainer.py[line:569] - INFO: Train Epoch 2, Time:0.105[T:0.101/D:0.005], Total Iter [200/200000], [100/100]:Losses:[train_prediction]:5.5317
+2022-05-23 10:56:05,337 - trainer.py[line:569] - INFO: Train Epoch 3, Time:0.110[T:0.106/D:0.004], Total Iter [300/200000], [100/100]:Losses:[train_prediction]:5.4374
+2022-05-23 10:56:16,128 - trainer.py[line:569] - INFO: Train Epoch 4, Time:0.100[T:0.097/D:0.003], Total Iter [400/200000], [100/100]:Losses:[train_prediction]:5.1356
+2022-05-23 10:56:27,109 - trainer.py[line:569] - INFO: Train Epoch 5, Time:0.106[T:0.102/D:0.004], Total Iter [500/200000], [100/100]:Losses:[train_prediction]:5.4023
+2022-05-23 10:56:37,855 - trainer.py[line:569] - INFO: Train Epoch 6, Time:0.108[T:0.105/D:0.003], Total Iter [600/200000], [100/100]:Losses:[train_prediction]:4.8776
+2022-05-23 10:56:48,599 - trainer.py[line:569] - INFO: Train Epoch 7, Time:0.101[T:0.099/D:0.003], Total Iter [700/200000], [100/100]:Losses:[train_prediction]:5.1642
+2022-05-23 10:56:59,480 - trainer.py[line:569] - INFO: Train Epoch 8, Time:0.103[T:0.100/D:0.003], Total Iter [800/200000], [100/100]:Losses:[train_prediction]:4.9484
+2022-05-23 10:57:10,075 - trainer.py[line:569] - INFO: Train Epoch 9, Time:0.099[T:0.097/D:0.003], Total Iter [900/200000], [100/100]:Losses:[train_prediction]:4.9047
+2022-05-23 10:57:20,568 - trainer.py[line:569] - INFO: Train Epoch 10, Time:0.099[T:0.096/D:0.003], Total Iter [1000/200000], [100/100]:Losses:[train_prediction]:4.7688
+2022-05-23 10:57:31,044 - trainer.py[line:569] - INFO: Train Epoch 11, Time:0.099[T:0.097/D:0.003], Total Iter [1100/200000], [100/100]:Losses:[train_prediction]:4.6685
+2022-05-23 10:57:41,504 - trainer.py[line:569] - INFO: Train Epoch 12, Time:0.099[T:0.097/D:0.003], Total Iter [1200/200000], [100/100]:Losses:[train_prediction]:5.0144
+2022-05-23 10:57:51,992 - trainer.py[line:569] - INFO: Train Epoch 13, Time:0.102[T:0.100/D:0.003], Total Iter [1300/200000], [100/100]:Losses:[train_prediction]:4.3470
+2022-05-23 10:58:02,467 - trainer.py[line:569] - INFO: Train Epoch 14, Time:0.099[T:0.096/D:0.003], Total Iter [1400/200000], [100/100]:Losses:[train_prediction]:4.5812
+2022-05-23 10:58:13,191 - trainer.py[line:569] - INFO: Train Epoch 15, Time:0.104[T:0.101/D:0.003], Total Iter [1500/200000], [100/100]:Losses:[train_prediction]:4.8045
+2022-05-23 10:58:23,668 - trainer.py[line:569] - INFO: Train Epoch 16, Time:0.102[T:0.099/D:0.003], Total Iter [1600/200000], [100/100]:Losses:[train_prediction]:4.4966
+2022-05-23 10:58:34,083 - trainer.py[line:569] - INFO: Train Epoch 17, Time:0.100[T:0.097/D:0.003], Total Iter [1700/200000], [100/100]:Losses:[train_prediction]:3.6679
+2022-05-23 10:58:44,599 - trainer.py[line:569] - INFO: Train Epoch 18, Time:0.099[T:0.096/D:0.003], Total Iter [1800/200000], [100/100]:Losses:[train_prediction]:3.9182
+2022-05-23 10:58:55,158 - trainer.py[line:569] - INFO: Train Epoch 19, Time:0.099[T:0.097/D:0.003], Total Iter [1900/200000], [100/100]:Losses:[train_prediction]:3.9563
+2022-05-23 10:59:05,595 - trainer.py[line:569] - INFO: Train Epoch 20, Time:0.102[T:0.099/D:0.003], Total Iter [2000/200000], [100/100]:Losses:[train_prediction]:3.7629
